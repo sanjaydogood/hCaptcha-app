@@ -10,10 +10,8 @@ export class HCaptchaService {
   constructor(private httpClient: HttpClient) {}
 
   verifyToken(token: string): Observable<Object> {
-    const remoteUrl = 'https://vast-scrubland-92936.herokuapp.com/sign-up';
-    const localUrl = '/sign-up';
     return this.httpClient
-      .post(localUrl, {
+      .post('/sign-up', {
         token,
       })
       .pipe(catchError((err) => of(err.error)));

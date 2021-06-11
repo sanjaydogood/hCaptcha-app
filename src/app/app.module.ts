@@ -16,7 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     NgHcaptchaModule.forRoot({
-      siteKey: '10000000-ffff-ffff-ffff-000000000001',
+      siteKey: '0dd6a5b1-c175-4a11-bd4d-6b6d464bd802',
       languageCode: 'en',
     }),
     ReactiveFormsModule,
