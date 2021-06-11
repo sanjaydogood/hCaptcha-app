@@ -53,4 +53,4 @@ router.post("/sign-up", async function (req, res) {
 });
 
 app.use(router);
-app.listen(port, () => console.log(`Server running @ ${port} !`));
+app.listen(process.env.PORT || 8080);
