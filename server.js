@@ -4,16 +4,15 @@ const {
   verify
 } = require('hcaptcha');
 const cors = require("cors");
-const {
-  APP_BASE_HREF
-} = require('@angular/common');
 const app = express();
-app.use(express.urlencoded({
-  extended: true
-}));
+const router = express.Router();
 
 const secret = '0x0000000000000000000000000000000000000000';
 const actualSecret = '0x8a185D050c8A08EDf8136ca132F8a7cbF5e6041F';
+
+app.use(express.urlencoded({
+  extended: true
+}));
 
 app.use(express.static(__dirname + '/dist/hCaptcha'));
 app.use(express.json());
