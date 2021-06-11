@@ -1,0 +1,15 @@
+<form [formGroup]="tempForm" (submit)="onSubmit()">
+  <label>
+    First Name:
+    <input type="text" formControlName="firstName" />
+  </label>
+
+  <label>
+    Last Name:
+    <input type="text" formControlName="lastName" />
+  </label>
+
+  <ng-hcaptcha formControlName="captcha"></ng-hcaptcha>
+
+  <button type="submit">Submit</button>
+</form>
