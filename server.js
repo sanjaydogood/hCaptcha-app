@@ -1,12 +1,57 @@
 const express = require('express');
 const path = require('path');
+const {
+  verify
+} = require('hcaptcha');
+const cors = require("cors");
+const {
+  APP_BASE_HREF
+} = require('@angular/common');
 const app = express();
-// Run the app by serving the static files
-// in the dist directory
+app.use(express.urlencoded({
+  extended: true
+}));
+
+const secret = '0x0000000000000000000000000000000000000000';
+const actualSecret = '0x8a185D050c8A08EDf8136ca132F8a7cbF5e6041F';
+
 app.use(express.static(__dirname + '/dist/hCaptcha'));
-// Start the app by listening on the default
-// Heroku port
+app.use(express.json());
+app.use(cors());
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/dist/hCaptchaindex.html'));
 });
-app.listen(process.env.PORT || 8080);
+
+router.post("/sign-up", async function (req, res) {
+
+  const token = req.body.token;
+  if (!token) {
+    res.status(400).json({
+      error: "Token is missing"
+    });
+  }
+
+  try {
+    const {
+      success
+    } = await verify(secret, token);
+
+    if (success) {
+      return res.json({
+        success: true
+      });
+    } else {
+      return res.status(400).json({
+        error: 'Invalid Captcha'
+      });
+    }
+  } catch (e) {
+    return res.status(404).json({
+      error: 'There was trouble reaching the server. Try again!'
+    });
+  }
+});
+
+app.use(router);
+app.listen(port, () => console.log(`Server running @ ${port} !`));
