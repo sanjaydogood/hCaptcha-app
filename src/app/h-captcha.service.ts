@@ -11,7 +11,7 @@ export class HCaptchaService {
 
   verifyToken(token: string): Observable<Object> {
     const remoteUrl = 'https://vast-scrubland-92936.herokuapp.com/sign-up';
-    const localUrl = 'http://localhost:8080/sign-up';
+    const localUrl = '/sign-up';
     return this.httpClient
       .post(localUrl, {
         token,
