@@ -11,7 +11,7 @@ export class HCaptchaService {
 
   verifyToken(token: string): Observable<Object> {
     return this.httpClient
-      .post('/sign-up', {
+      .post('/verify-hcaptcha', {
         token,
       })
       .pipe(catchError((err) => of(err.error)));

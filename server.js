@@ -21,7 +21,7 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/dist/hCaptchaindex.html'));
 });
 
-router.post("/sign-up", async function (req, res) {
+router.post("/verify-hcaptcha", async function (req, res) {
 
   const token = req.body.token;
   if (!token) {
