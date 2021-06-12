@@ -23,7 +23,6 @@ export class SignInFormComponent implements OnInit {
     });
 
     this.tempForm.valueChanges.subscribe((formData) => {
-      console.log(formData.firstName);
       this.isFormValid = formData.username !== '' && formData.password !== '';
     });
   }
@@ -38,10 +37,8 @@ export class SignInFormComponent implements OnInit {
         .verifyToken(token)
         .subscribe((response: HCaptchaResponse) => {
           if (response.success) {
-            console.log('successful bhai: ', response.success);
             this.isTokenValid = true;
           } else if (response.error) {
-            console.log('error bhai: ', response.error);
             this.isTokenValid = false;
             // Show error messsage
           }
