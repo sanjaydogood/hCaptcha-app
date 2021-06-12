@@ -4,6 +4,7 @@ const {
   verify
 } = require('hcaptcha');
 const cors = require("cors");
+const db = require('./src/assets/db.json');
 const app = express();
 const router = express.Router();
 const port = process.env.PORT || 8080;
@@ -17,7 +18,7 @@ app.use(express.static(__dirname + '/dist/hCaptcha'));
 app.use(express.json());
 app.use(cors());
 
-app.get('/', function (req, res) {
+router.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/dist/hCaptchaindex.html'));
 });
 
@@ -49,6 +50,30 @@ router.post("/verify-hcaptcha", async function (req, res) {
       error: 'There was trouble reaching the server. Try again!'
     });
   }
+});
+
+router.post('/sign-in', function (req, res) {
+
+  const {
+    username,
+    password
+  } = req.body;
+
+  if (db[username]) {
+    if (db[username].password === password) {
+      return res.json({
+        success: true
+      });
+    }
+    return res.json({
+      error: 'Incorrect password'
+    });
+  }
+
+  return res.json({
+    error: 'User not found'
+  });
+
 });
 
 app.use(router);

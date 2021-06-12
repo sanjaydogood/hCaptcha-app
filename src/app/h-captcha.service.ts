@@ -9,11 +9,20 @@ import { catchError } from 'rxjs/operators';
 export class HCaptchaService {
   constructor(private httpClient: HttpClient) {}
 
-  verifyToken(token: string): Observable<Object> {
+  httpPost(
+    url: string,
+    data: { token: string } | { username: string; password: string }
+  ) {
     return this.httpClient
-      .post('/verify-hcaptcha', {
-        token,
-      })
+      .post(url, data)
       .pipe(catchError((err) => of(err.error)));
+  }
+
+  verifyToken(token: string): Observable<Object> {
+    return this.httpPost('/verify-hcaptcha', { token });
+  }
+
+  postForm(data: { username: string; password: string }): Observable<Object> {
+    return this.httpPost('/sign-in', data);
   }
 }

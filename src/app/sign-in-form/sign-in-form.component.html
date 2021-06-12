@@ -2,12 +2,22 @@
   <div class="form-header">Sign in</div>
   <form [formGroup]="tempForm" (submit)="onSubmit()" class="sign-in-form">
     <div class="form-element">
-      <label for="firstName"> First Name:</label>
-      <input type="text" formControlName="firstName" id="firstName" />
+      <label for="username"> Username: </label>
+      <input
+        type="text"
+        formControlName="username"
+        id="username"
+        placeholder="Username"
+      />
     </div>
     <div class="form-element">
-      <label for="lastName"> Last Name: </label>
-      <input type="text" formControlName="lastName" id="lastName" />
+      <label for="password">Password: </label>
+      <input
+        type="password"
+        formControlName="password"
+        id="password"
+        placeholder="Password"
+      />
     </div>
     <div class="form-element">
       <ng-hcaptcha formControlName="captcha"></ng-hcaptcha>

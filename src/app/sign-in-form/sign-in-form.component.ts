@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { HCaptchaService } from '../h-captcha.service';
 import { HCaptchaResponse } from '../HCaptchaResponse.model';
 
@@ -13,23 +13,25 @@ export class SignInFormComponent implements OnInit {
   isTokenValid = true;
   isFormValid = false;
   errorMessage = '';
+  tempForm: FormGroup;
+
   constructor(private fb: FormBuilder, private hCap: HCaptchaService) {
+    this.tempForm = this.fb.group({
+      username: [''],
+      password: [''],
+      captcha: [''],
+    });
+
     this.tempForm.valueChanges.subscribe((formData) => {
       console.log(formData.firstName);
-      this.isFormValid = formData.firstName !== '' && formData.lastName !== '';
+      this.isFormValid = formData.username !== '' && formData.password !== '';
     });
   }
 
   ngOnInit(): void {}
 
-  tempForm = this.fb.group({
-    firstName: [''],
-    lastName: [''],
-    captcha: [''],
-  });
-
   onSubmit() {
-    const token = this.tempForm.controls['captcha'].value;
+    const token = this.tempForm.get('captcha')?.value;
 
     if (token) {
       this.hCaptchaSubscription = this.hCap
@@ -52,6 +54,13 @@ export class SignInFormComponent implements OnInit {
 
     if (this.isTokenValid) {
       // Submit Form
+      const payload = {
+        username: this.tempForm.get('username')?.value,
+        password: this.tempForm.get('password')?.value,
+      };
+      this.hCap
+        .postForm(payload)
+        .subscribe((data) => console.log('response form sign-in: ', data));
     }
   }
 }
