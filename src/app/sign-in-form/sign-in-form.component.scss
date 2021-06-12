@@ -1,0 +1,42 @@
+.sign-in-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-element {
+  margin: 0.325em 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.error-alert-container {
+  @extend .form-element;
+  background-color: lightcoral;
+  padding: 0.625em 1em;
+  border-radius: 0.3125em;
+  & .error-alert {
+    color: white;
+  }
+}
+
+.btn {
+  padding: 0.625em 1em;
+  border-radius: 0.3125em;
+  border: none;
+  font-weight: 700;
+  &.btn-primary {
+    cursor: pointer;
+    background-color: green;
+    color: white;
+  }
+  &.btn-primary:disabled {
+    cursor: not-allowed;
+    background-color: lightgreen;
+    color: white;
+  }
+}

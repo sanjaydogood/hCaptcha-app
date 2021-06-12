@@ -6,7 +6,7 @@ const {
 const cors = require("cors");
 const app = express();
 const router = express.Router();
-
+const port = process.env.PORT || 8080;
 const secret = '0x8a185D050c8A08EDf8136ca132F8a7cbF5e6041F';
 
 app.use(express.urlencoded({
@@ -52,4 +52,4 @@ router.post("/verify-hcaptcha", async function (req, res) {
 });
 
 app.use(router);
-app.listen(process.env.PORT || 8080);
+app.listen(port, () => console.log(`Server listening on port ${port}`));

@@ -10,8 +10,15 @@ import { HCaptchaResponse } from '../HCaptchaResponse.model';
 })
 export class SignInFormComponent implements OnInit {
   hCaptchaSubscription: any;
-  isTokenValid = false;
-  constructor(private fb: FormBuilder, private hCap: HCaptchaService) {}
+  isTokenValid = true;
+  isFormValid = false;
+  errorMessage = '';
+  constructor(private fb: FormBuilder, private hCap: HCaptchaService) {
+    this.tempForm.valueChanges.subscribe((formData) => {
+      console.log(formData.firstName);
+      this.isFormValid = formData.firstName !== '' && formData.lastName !== '';
+    });
+  }
 
   ngOnInit(): void {}
 
@@ -22,7 +29,6 @@ export class SignInFormComponent implements OnInit {
   });
 
   onSubmit() {
-    console.log('submitted');
     const token = this.tempForm.controls['captcha'].value;
 
     if (token) {
@@ -40,7 +46,8 @@ export class SignInFormComponent implements OnInit {
         });
     } else {
       // Show error under hcaptcha widget to check it
-      console.log('sorry, please check the hcaptcha box');
+      this.isTokenValid = false;
+      this.errorMessage = 'Please check the above checkbox';
     }
 
     if (this.isTokenValid) {
