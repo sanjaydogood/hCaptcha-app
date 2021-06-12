@@ -40,6 +40,7 @@ export class SignInFormComponent implements OnInit {
             this.isTokenValid = true;
           } else if (response.error) {
             this.isTokenValid = false;
+            this.errorMessage = response.error;
             // Show error messsage
           }
         });
