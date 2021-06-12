@@ -1,21 +1,24 @@
-<form [formGroup]="tempForm" (submit)="onSubmit()" class="sign-in-form">
-  <div class="form-element">
-    <label for="firstName"> First Name:</label>
-    <input type="text" formControlName="firstName" id="firstName" />
-  </div>
-  <div class="form-element">
-    <label for="lastName"> Last Name: </label>
-    <input type="text" formControlName="lastName" id="lastName" />
-  </div>
-  <div class="form-element">
-    <ng-hcaptcha formControlName="captcha"></ng-hcaptcha>
-  </div>
-  <div class="error-alert-container" *ngIf="!isTokenValid">
-    <div class="error-alert">
-      {{ errorMessage }}
+<div class="sign-in-form-container">
+  <div class="form-header">Sign in</div>
+  <form [formGroup]="tempForm" (submit)="onSubmit()" class="sign-in-form">
+    <div class="form-element">
+      <label for="firstName"> First Name:</label>
+      <input type="text" formControlName="firstName" id="firstName" />
     </div>
-  </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!isFormValid">
-    Submit
-  </button>
-</form>
+    <div class="form-element">
+      <label for="lastName"> Last Name: </label>
+      <input type="text" formControlName="lastName" id="lastName" />
+    </div>
+    <div class="form-element">
+      <ng-hcaptcha formControlName="captcha"></ng-hcaptcha>
+    </div>
+    <div class="error-alert-container" *ngIf="!isTokenValid">
+      <div class="error-alert">
+        {{ errorMessage }}
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!isFormValid">
+      Submit
+    </button>
+  </form>
+</div>
