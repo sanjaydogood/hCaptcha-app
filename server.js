@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 router.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname + '/dist/hCaptchaindex.html'));
+  res.sendFile(path.join(__dirname + '/dist/hCaptcha/index.html'));
 });
 
 router.post("/verify-hcaptcha", async function (req, res) {
