@@ -33,6 +33,7 @@ export class SignInFormComponent implements OnInit {
     const token = this.tempForm.get('captcha')?.value;
 
     if (token) {
+      this.tempForm.get('captcha')?.reset();
       this.hCaptchaSubscription = this.hCap
         .verifyToken(token)
         .subscribe((response: HCaptchaResponse) => {
