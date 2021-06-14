@@ -1,0 +1,40 @@
+.create-account{
+    display: flex;
+    padding:5px;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.create-account__form-header{
+    font-size:2.5em ;
+    padding: 10px;
+}
+.create-account__user-name, .create-account__password{
+    display: flex;
+    width: 100%;
+    padding:10px;
+    flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+    
+}
+
+.captcha{
+    padding: 10px 10px 10px 0px;
+}
+.submit{
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+.error{
+    color: rgb(231, 121, 77);
+    font-size: 12px;
+    padding: 10px 0px 10px 10px;
+    
+}
+a{
+    color: rgb(47, 196, 201);
+    cursor: pointer;
+    font-size: 12px;
+  }

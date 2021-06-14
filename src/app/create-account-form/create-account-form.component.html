@@ -1,0 +1,50 @@
+<div class="create-account">
+  <div class="create-account__form-header">Create account</div>
+  <form class="form" [formGroup]="tempForm" (submit)="onSubmit()" >
+    <div class="create-account__user-name">
+      <label for="username"> Username: </label>
+      <input
+        type="text"
+        formControlName="username"
+        id="username"
+        placeholder="Enter Username"
+      />
+    </div>
+
+    <div class="create-account__password">
+      <label for="password">Password: </label>
+      <input
+        type="password"
+        formControlName="password"
+        id="password"
+        placeholder="Set a strong Password"
+      />
+    </div>
+
+    <div class="captcha">
+      <ng-hcaptcha formControlName="captcha"></ng-hcaptcha>
+    </div>
+    <div class="error">
+      {{ errorMessage }}
+      <span *ngIf="exists">
+        <a
+        href="#"
+        aria-valuetext="Sign in"
+        [routerLink]="['/sign-in']"
+        routerLinkActive="active"
+        >Sign-in</a
+      >
+      </span>
+    </div>
+   
+   
+        <button class="submit" type="submit"  [disabled]="!isFormValid">Submit</button>
+   
+
+    <!-- <div *ngIf="loader">
+      <img
+        src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif"
+      />
+    </div> -->
+  </form>
+</div>

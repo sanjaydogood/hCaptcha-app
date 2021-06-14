@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { HCaptchaResponse } from './HCaptchaResponse.model';
+import { userDeatils } from './userDetails.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -24,5 +26,9 @@ export class HCaptchaService {
 
   postForm(data: { username: string; password: string }): Observable<Object> {
     return this.httpPost('/sign-in', data);
+  }
+
+  addUser(data: { username: string; password: string }):Observable<HCaptchaResponse>{
+    return this.httpPost('/create-account', data);
   }
 }

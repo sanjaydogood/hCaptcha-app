@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { HCaptchaService } from '../h-captcha.service';
 import { HCaptchaResponse } from '../HCaptchaResponse.model';
 
@@ -15,7 +16,11 @@ export class SignInFormComponent implements OnInit {
   errorMessage = '';
   tempForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private hCap: HCaptchaService) {
+  constructor(
+    private fb: FormBuilder,
+    private hCap: HCaptchaService,
+    private router: Router
+  ) {
     this.tempForm = this.fb.group({
       username: [''],
       password: [''],
@@ -51,14 +56,13 @@ export class SignInFormComponent implements OnInit {
     }
 
     if (this.isTokenValid) {
-      // Submit Form
       const payload = {
         username: this.tempForm.get('username')?.value,
         password: this.tempForm.get('password')?.value,
       };
-      this.hCap
-        .postForm(payload)
-        .subscribe((data) => console.log('response form sign-in: ', data));
+      this.hCap.postForm(payload).subscribe((data) => {
+        this.router.navigate(['/landing-page']);
+      });
     }
   }
 }
