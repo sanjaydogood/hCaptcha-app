@@ -1,1 +1,12 @@
-{"users":[{"username":"sanjay","password":"sanjay"},{"username":"shivangi","password":"shivangi"},{"username":"shivi","password":"shivi"},{"username":"shividsfs","password":"shivi"},{"username":"","password":""},{"username":"abcd","password":"shivi"},{"username":"shivsd","password":"fssdfd"},{"username":"aaa","password":"aaa"},{"username":"abc","password":"anbc"}]}
+{
+  "users": [
+    {
+      "username": "sanjay",
+      "password": "sanjay"
+    },
+    {
+      "username": "shivangi",
+      "password": "shivangi"
+    }
+  ]
+}

@@ -5,7 +5,10 @@ var data = fs.readFileSync("./src/assets/db.json");
 var obj = JSON.parse(data);
 const { verify } = require("hcaptcha");
 const cors = require("cors");
-const db = require("./src/assets/db.json");
+const db = require('./src/assets/db.json');
+const {
+  connectableObservableDescriptor
+} = require('rxjs/internal/observable/ConnectableObservable');
 const app = express();
 const router = express.Router();
 const port = process.env.PORT || 8080;
@@ -55,8 +58,13 @@ router.post("/verify-hcaptcha", async function (req, res) {
 router.post("/sign-in", function (req, res) {
   const { username, password } = req.body;
 
-  if (db[username]) {
-    if (db[username].password === password) {
+  const userIndex = db.users.findIndex((user) => user.username === username);
+  const doesUserExist = userIndex !== -1 ? true : false;
+
+  console.log(userIndex, doesUserExist);
+
+  if (doesUserExist) {
+    if (db.users[userIndex].password === password) {
       return res.json({
         success: true,
       });
