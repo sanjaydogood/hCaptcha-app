@@ -1,8 +1,12 @@
 {
-  "sanjay": {
-    "password": "sanjay"
-  },
-  "shivangi": {
-    "password": "shivangi"
-  }
+  "users": [
+    {
+      "username": "sanjay",
+      "password": "sanjay"
+    },
+    {
+      "username": "shivangi",
+      "password": "shivangi"
+    }
+  ]
 }
