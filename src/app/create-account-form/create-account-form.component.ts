@@ -41,16 +41,16 @@ export class CreateAccountFormComponent implements OnInit {
 
     if (true) {
       this.tempForm.get('captcha')?.reset();
-      // this.hCaptchaSubscription = this.hCap
-      //   .verifyToken(token)
-      //   .subscribe((response: HCaptchaResponse) => {
-      //     if (response.success) {
-      //       this.isTokenValid = true;
-      //     } else if (response.error) {
-      //       this.isTokenValid = false;
-      //       this.errorMessage = response.error;
-      //     }
-      //   });
+      this.hCaptchaSubscription = this.captchaService
+        .verifyToken(token)
+        .subscribe((response: HCaptchaResponse) => {
+          if (response.success) {
+            this.isTokenValid = true;
+          } else if (response.error) {
+            this.isTokenValid = false;
+            this.errorMessage = response.error;
+          }
+        });
     } else {
       // Show error under hcaptcha widget to check it
       this.isTokenValid = false;
