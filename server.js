@@ -32,7 +32,7 @@ router.post("/verify-hcaptcha", async function (req, res) {
   const token = req.body.token;
   if (!token) {
     res.status(400).json({
-      error: "Please check the check Box",
+      error: "Token is missing",
     });
   }
 
