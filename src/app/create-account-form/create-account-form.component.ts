@@ -39,13 +39,14 @@ export class CreateAccountFormComponent implements OnInit {
   onSubmit(): void {
     const token = this.tempForm.get('captcha')?.value;
 
-    if (true) {
+    if (token) {
       this.tempForm.get('captcha')?.reset();
       this.hCaptchaSubscription = this.captchaService
         .verifyToken(token)
         .subscribe((response: HCaptchaResponse) => {
           if (response.success) {
             this.isTokenValid = true;
+            this.errorMessage="";
           } else if (response.error) {
             this.isTokenValid = false;
             this.errorMessage = response.error;
