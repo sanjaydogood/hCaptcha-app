@@ -17,7 +17,7 @@ export class CreateAccountFormComponent implements OnInit {
   isFormValid = false;
   errorMessage = '';
   loader = false;
-  exists=false;
+  exists = false;
   constructor(
     private form: FormBuilder,
     private captchaService: HCaptchaService,
@@ -46,7 +46,7 @@ export class CreateAccountFormComponent implements OnInit {
         .subscribe((response: HCaptchaResponse) => {
           if (response.success) {
             this.isTokenValid = true;
-            this.errorMessage="";
+            this.errorMessage = '';
           } else if (response.error) {
             this.isTokenValid = false;
             this.errorMessage = response.error;
@@ -63,19 +63,19 @@ export class CreateAccountFormComponent implements OnInit {
         username: this.tempForm.get('username')?.value,
         password: this.tempForm.get('password')?.value,
       };
-      this.captchaService.addUser(payload).subscribe((data) => {
-        if (data.success) {
-          this.loader = true;
-          timer(3000).subscribe(() => {
-            this.router.navigate(['/sign-in']);
-          });
-          
-        }else
-        {
-          this.errorMessage = `${data.error}`;
-          this.exists=true;
-        }
-      });
+      this.captchaService
+        .addUser(payload)
+        .subscribe((data: HCaptchaResponse) => {
+          if (data.success) {
+            this.loader = true;
+            timer(3000).subscribe(() => {
+              this.router.navigate(['/sign-in']);
+            });
+          } else if(data.error){
+            this.errorMessage = data.error;
+            this.exists = true;
+          }
+        });
     }
   }
 }
