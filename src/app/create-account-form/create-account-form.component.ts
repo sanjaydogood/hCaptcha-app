@@ -50,6 +50,8 @@ export class CreateAccountFormComponent implements OnInit {
           } else if (response.error) {
             this.isTokenValid = false;
             this.errorMessage = response.error;
+          }else{
+            this.errorMessage = "verify network failure";
           }
         });
     } else {
