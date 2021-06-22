@@ -1,4 +1,4 @@
-<div class="create-account">
+<div class="create-account" *ngIf="!loader">
   <div class="create-account__form-header">Create account</div>
   <form class="form" [formGroup]="tempForm" (submit)="onSubmit()" >
     <div class="create-account__user-name">
@@ -41,10 +41,12 @@
         <button class="submit" type="submit"  [disabled]="!isFormValid">Submit</button>
    
 
-    <!-- <div *ngIf="loader">
-      <img
-        src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif"
-      />
-    </div> -->
+    
   </form>
+</div>
+<div *ngIf="loader" class="loader-image">
+  <img
+    src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif"
+  />
+ <h2>Account added successfully</h2> 
 </div>

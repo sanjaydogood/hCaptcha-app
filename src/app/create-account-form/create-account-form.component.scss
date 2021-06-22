@@ -38,3 +38,12 @@ a{
     cursor: pointer;
     font-size: 12px;
   }
+  .loader-image{
+    display: flex;
+    padding:5px;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width:200px;
+    height: 200px;
+  }
