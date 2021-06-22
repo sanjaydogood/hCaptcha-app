@@ -64,7 +64,7 @@ export class CreateAccountFormComponent implements OnInit {
     this.captchaService.addUser(payload).subscribe((data: HCaptchaResponse) => {
       if (data.success) {
         this.loader = true;
-        timer(3000).subscribe(() => {
+        timer(5000).subscribe(() => {
           this.router.navigate(['/sign-in']);
         });
       } else if (data.error) {
