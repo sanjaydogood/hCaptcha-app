@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { timer } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { HCaptchaService } from '../h-captcha.service';
 import { HCaptchaResponse } from '../HCaptchaResponse.model';
 
@@ -13,11 +13,11 @@ import { HCaptchaResponse } from '../HCaptchaResponse.model';
 export class CreateAccountFormComponent implements OnInit {
   tempForm: FormGroup;
   hCaptchaSubscription: any;
-  isTokenValid = true;
+  
   isFormValid = false;
   errorMessage = '';
   loader = false;
-  exists = false;
+
   constructor(
     private form: FormBuilder,
     private captchaService: HCaptchaService,
@@ -45,40 +45,34 @@ export class CreateAccountFormComponent implements OnInit {
         .verifyToken(token)
         .subscribe((response: HCaptchaResponse) => {
           if (response.success) {
-            this.isTokenValid = true;
+            this.addingUser();
           } else if (response.error) {
-            this.isTokenValid = false;
             alert(response.error);
           } else {
-            alert('verify network failure');
+            alert('Network Error, Please try again !');
           }
         });
     } else {
-      // Show error under hcaptcha widget to check it
-      this.isTokenValid = false;
       this.errorMessage = 'Please check the above checkbox';
     }
+  }
 
-    if (this.isTokenValid) {
-      const payload = {
-        username: this.tempForm.get('username')?.value,
-        password: this.tempForm.get('password')?.value,
-      };
-      this.captchaService
-        .addUser(payload)
-        .subscribe((data: HCaptchaResponse) => {
-          if (data.success) {
-            this.loader = true;
-            timer(3000).subscribe(() => {
-              this.router.navigate(['/sign-in']);
-            });
-          } else if (data.error) {
-            this.errorMessage = data.error;
-            this.exists = true;
-          } else {
-            alert('network error !!!');
-          }
+  addingUser(): void {
+    const payload = {
+      username: this.tempForm.get('username')?.value,
+      password: this.tempForm.get('password')?.value,
+    };
+    this.captchaService.addUser(payload).subscribe((data: HCaptchaResponse) => {
+      if (data.success) {
+        this.loader = true;
+        timer(3000).subscribe(() => {
+          this.router.navigate(['/sign-in']);
         });
-    }
+      } else if (data.error) {
+        this.errorMessage = data.error;
+      } else {
+        alert('Network Error, Please try again !');
+      }
+    });
   }
 }

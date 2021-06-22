@@ -26,25 +26,25 @@
     </div>
     <div class="error">
       {{ errorMessage }}
-      <span *ngIf="exists">
-        <a
-          href="#"
-          aria-valuetext="Sign in"
-          [routerLink]="['/sign-in']"
-          routerLinkActive="active"
-          >Sign-in</a
-        >
-      </span>
     </div>
-
+     
     <button class="submit" type="submit" [disabled]="!isFormValid">
       Submit
     </button>
+    <span >
+      <a
+        href="#"
+        aria-valuetext="Sign in"
+        [routerLink]="['/sign-in']"
+        routerLinkActive="active"
+        >Sign-in</a
+      >
+    </span>
   </form>
 </div>
 <div *ngIf="loader" class="loader-image">
   <img
     src="https://lh3.googleusercontent.com/proxy/CqdU6w6K7oAK1K8WI-Ko7CVzNo7ZKeuxMelpv8tSvGs0-5drAVGzEd1gjyeNL_ClxJT_Q8jnFvkP3Ypwzb8Ol1s_8a3EwbhDHve4Hi3o04gW"
   />
-  <h2>Account added successfully</h2>
+  <div>Account added successfully !</div>
 </div>
