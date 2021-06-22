@@ -13,7 +13,6 @@ import { HCaptchaResponse } from '../HCaptchaResponse.model';
 export class CreateAccountFormComponent implements OnInit {
   tempForm: FormGroup;
   hCaptchaSubscription: any;
-  isTokenValid = true;
   isFormValid = false;
   errorMessage = '';
   loader = false;
@@ -44,9 +43,8 @@ export class CreateAccountFormComponent implements OnInit {
         .verifyToken(token)
         .subscribe((response: HCaptchaResponse) => {
           if (response.success) {
-            this.isTokenValid = true;
+            this.addingUser();
           } else if (response.error) {
-            this.isTokenValid = false;
             alert(response.error);
           } else {
             alert('verify network failure');
@@ -54,30 +52,26 @@ export class CreateAccountFormComponent implements OnInit {
         });
     } else {
       // Show error under hcaptcha widget to check it
-      this.isTokenValid = false;
+
       this.errorMessage = 'Please check the above checkbox';
     }
-
-    if (this.isTokenValid) {
-      const payload = {
-        username: this.tempForm.get('username')?.value,
-        password: this.tempForm.get('password')?.value,
-      };
-      this.captchaService
-        .addUser(payload)
-        .subscribe((data: HCaptchaResponse) => {
-          if (data.success) {
-            this.loader = true;
-            timer(3000).subscribe(() => {
-              this.router.navigate(['/sign-in']);
-            });
-          } else if (data.error) {
-            this.errorMessage = data.error;
-            
-          } else {
-            alert('network error !!!');
-          }
+  }
+  addingUser(): void {
+    const payload = {
+      username: this.tempForm.get('username')?.value,
+      password: this.tempForm.get('password')?.value,
+    };
+    this.captchaService.addUser(payload).subscribe((data: HCaptchaResponse) => {
+      if (data.success) {
+        this.loader = true;
+        timer(3000).subscribe(() => {
+          this.router.navigate(['/sign-in']);
         });
-    }
+      } else if (data.error) {
+        this.errorMessage = data.error;
+      } else {
+        alert('network error !!!');
+      }
+    });
   }
 }
