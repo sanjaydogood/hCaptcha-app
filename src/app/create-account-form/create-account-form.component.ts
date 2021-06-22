@@ -74,6 +74,8 @@ export class CreateAccountFormComponent implements OnInit {
           } else if(data.error){
             this.errorMessage = data.error;
             this.exists = true;
+          }else{
+            this.errorMessage = "network error !!!";
           }
         });
     }
