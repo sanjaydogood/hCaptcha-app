@@ -68,9 +68,12 @@ export class CreateAccountFormComponent implements OnInit {
         .subscribe((data: HCaptchaResponse) => {
           if (data.success) {
             this.loader = true;
-            this.router.navigate(['/sign-in']);
+            timer(3000).subscribe(() => {
+              this.router.navigate(['/sign-in']);
+            });
           } else if (data.error) {
             this.errorMessage = data.error;
+            
           } else {
             alert('network error !!!');
           }
