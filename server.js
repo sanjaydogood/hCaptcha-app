@@ -44,11 +44,13 @@ router.post("/verify-hcaptcha", async function (req, res) {
         success: true,
       });
     } else {
+      alert("network error 1");
       return res.status(400).json({
         error: "Invalid Captcha",
       });
     }
   } catch (e) {
+    alert("network error 2r");
     return res.status(404).json({
       error: "There was trouble reaching the server. Try again!",
     });
