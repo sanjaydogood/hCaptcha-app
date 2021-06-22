@@ -73,7 +73,7 @@ export class CreateAccountFormComponent implements OnInit {
               this.router.navigate(['/sign-in']);
             });
           } else if (data.error) {
-            this.errorMessage = `${data.error}`;
+            this.errorMessage = data.error;
             this.exists = true;
           } else {
             alert('network error !!!');

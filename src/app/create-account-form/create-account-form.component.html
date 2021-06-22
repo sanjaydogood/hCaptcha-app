@@ -1,6 +1,6 @@
 <div class="create-account" *ngIf="!loader">
   <div class="create-account__form-header">Create account</div>
-  <form class="form" [formGroup]="tempForm" (submit)="onSubmit()" >
+  <form class="form" [formGroup]="tempForm" (submit)="onSubmit()">
     <div class="create-account__user-name">
       <label for="username"> Username: </label>
       <input
@@ -28,25 +28,23 @@
       {{ errorMessage }}
       <span *ngIf="exists">
         <a
-        href="#"
-        aria-valuetext="Sign in"
-        [routerLink]="['/sign-in']"
-        routerLinkActive="active"
-        >Sign-in</a
-      >
+          href="#"
+          aria-valuetext="Sign in"
+          [routerLink]="['/sign-in']"
+          routerLinkActive="active"
+          >Sign-in</a
+        >
       </span>
     </div>
-   
-   
-        <button class="submit" type="submit"  [disabled]="!isFormValid">Submit</button>
-   
 
-    
+    <button class="submit" type="submit" [disabled]="!isFormValid">
+      Submit
+    </button>
   </form>
 </div>
 <div *ngIf="loader" class="loader-image">
   <img
     src="https://thumbs.gfycat.com/QuaintLikelyFlyingfish-size_restricted.gif"
   />
- <h2>Account added successfully</h2> 
+  <h2>Account added successfully</h2>
 </div>
