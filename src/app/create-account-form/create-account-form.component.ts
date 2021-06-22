@@ -46,12 +46,11 @@ export class CreateAccountFormComponent implements OnInit {
         .subscribe((response: HCaptchaResponse) => {
           if (response.success) {
             this.isTokenValid = true;
-            this.errorMessage = '';
           } else if (response.error) {
             this.isTokenValid = false;
-            this.errorMessage = response.error;
-          }else{
-            this.errorMessage = "verify network failure";
+            alert(response.error);
+          } else {
+            alert('verify network failure');
           }
         });
     } else {
@@ -73,11 +72,11 @@ export class CreateAccountFormComponent implements OnInit {
             timer(3000).subscribe(() => {
               this.router.navigate(['/sign-in']);
             });
-          } else if(data.error){
+          } else if (data.error) {
             this.errorMessage = data.error;
             this.exists = true;
-          }else{
-            this.errorMessage = "network error !!!";
+          } else {
+            alert('network error !!!');
           }
         });
     }
